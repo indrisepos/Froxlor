@@ -74,7 +74,7 @@ Alias "/.well-known/acme-challenge" "{{settings.system.letsencryptchallengepath}
 ]]>
 						</content>
 					</file>
-					<command><![CDATA[/etc/init.d/apache2 restart]]></command>
+					<command><![CDATA[/bin/systemctl restart apache2]]></command>
 				</daemon>
 				<!-- HTTP Lighttpd -->
 				<daemon name="lighttpd" title="LigHTTPd">
@@ -138,7 +138,7 @@ include_shell "/usr/share/lighttpd/include-conf-enabled.pl"
 					</command>
 					<command><![CDATA[lighty-disable-mod cgi]]></command>
 					<command><![CDATA[lighty-disable-mod fastcgi]]></command>
-					<command><![CDATA[/etc/init.d/lighttpd restart]]></command>
+					<command><![CDATA[/bin/systemctl restart lighttpd]]></command>
 				</daemon>
 				<!-- HTTP Nginx -->
 				<daemon name="nginx" title="nginx">
@@ -354,7 +354,7 @@ exit "$RETVAL"
 						</visibility>
 						<content><![CDATA[/etc/init.d/php-fcgi restart]]></content>
 					</command>
-					<command><![CDATA[/etc/init.d/nginx restart]]></command>
+					<command><![CDATA[/bin/systemctl restart nginx]]></command>
 				</daemon>
 			</service>
 			<!--DNS -->
@@ -366,7 +366,7 @@ exit "$RETVAL"
 					<command><![CDATA[touch {{settings.system.bindconf_directory}}froxlor_bind.conf]]></command>
 					<command><![CDATA[chown bind:0 {{settings.system.bindconf_directory}}froxlor_bind.conf]]></command>
 					<command><![CDATA[chmod 0644 {{settings.system.bindconf_directory}}froxlor_bind.conf]]></command>
-					<command><![CDATA[/etc/init.d/bind9 restart]]></command>
+					<command><![CDATA[/bin/systemctl restart bind9]]></command>
 				</daemon>
 				<daemon name="powerdns" title="PowerDNS (standalone)">
 					<install><![CDATA[apt-get install pdns-server pdns-backend-mysql]]></install>
@@ -1578,7 +1578,7 @@ root:               root@<SERVERNAME>
 					</files>
 					<commands index="3">
 						<command><![CDATA[newaliases]]></command>
-						<command><![CDATA[/etc/init.d/postfix restart]]></command>
+						<command><![CDATA[/bin/systemctl restart postfix]]></command>
 					</commands>
 				</general>
 				<!-- postfix with dovecot -->
@@ -3299,7 +3299,7 @@ plugin {
 						</file>
 					</files>
 					<commands index="1">
-						<command><![CDATA[/etc/init.d/dovecot restart]]></command>
+						<command><![CDATA[/bin/systemctl restart dovecot]]></command>
 					</commands>
 				</general>
 				<!-- Dovecot with postfix -->
@@ -3722,7 +3722,7 @@ TLSVerifyClient                         off
 ]]>
 						</content>
 					</file>
-					<command><![CDATA[/etc/init.d/proftpd restart]]></command>
+					<command><![CDATA[/bin/systemctl restart proftpd]]></command>
 				</daemon>
 				<!-- Pureftpd -->
 				<daemon name="pureftpd" title="PureFTPd">
@@ -4088,7 +4088,7 @@ aliases:     files
 					<commands index="5">
 						<visibility mode="equals" value="apache2">{{settings.system.webserver}}
 						</visibility>
-						<command><![CDATA[/etc/init.d/apache2 restart]]></command>
+						<command><![CDATA[/bin/systemctl restart apache2]]></command>
 					</commands>
 					<!-- instead of just restarting apache, we let the cronjob do all the 
 						dirty work -->
